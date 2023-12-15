@@ -33,11 +33,11 @@ namespace Lib
             Console.Write("Enter your password: ");
             string password = Console.ReadLine();
 
-
-            try
+User? user = users.Find(u => u.UserName == username && u.Password == password);
+                    if (user == null)
                 {
-            User user = users.Find(u => u.UserName == username && u.Password == password);
-                if (user.ValidateCredentials(username, password))
+                    Console.WriteLine($"User \"{username}\" cannot be found!");
+                } else if (user.ValidateCredentials(username, password))
             {
                 Console.WriteLine("Login successful! Welcome, " + username + ".");
                 loggedIn = true;
@@ -46,17 +46,7 @@ namespace Lib
             {
                 Console.WriteLine("Invalid username or password. Please try again.");
             }
-                } catch(Exception ex)
-                {
-                    Console.WriteLine($"User \"{username}\" cannot be found!");
-                }
-
-
-
         }
-
         }
-
-
     }
 }
