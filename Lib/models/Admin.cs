@@ -28,15 +28,18 @@ public class Admin
         }
 
         int userId = usersDatabase.Count + 1;
-        usersDatabase.Add(new User { UserId = userId, UserName = userName });
+        // usersDatabase.Add(new User { UserId = userId, UserName = userName });
         Console.WriteLine($"User '{userName}' with ID {userId} added successfully.");
     }
 
+    /*
     public User SearchUser(string userName)
     {
         return usersDatabase.FirstOrDefault(u => u.UserName.Equals(userName, StringComparison.OrdinalIgnoreCase));
     }
+    */
 
+    /*
     public void AddReview(int userId, int rating, string comment)
     {
         if (rating < 1 || rating > 5)
@@ -49,4 +52,5 @@ public class Admin
         reviewsDatabase.Add(new Review { ReviewId = reviewId, Rating = rating, Comment = comment });
         Console.WriteLine($"Review with ID {reviewId} added successfully.");
     }
+    */
 }
