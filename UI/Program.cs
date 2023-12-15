@@ -1,6 +1,6 @@
 ﻿using Lib.models;
 
-namespace UI 
+namespace UI
 {
     internal class Program
     {
