@@ -4,11 +4,14 @@ namespace UI
 {
     internal class Program
     {
+        
         static void Main(string[] args)
         {
             App app = new App();
             app.PrintBanner();
+            app.Login();
             
+                   
             /*
             while(true)
             {
