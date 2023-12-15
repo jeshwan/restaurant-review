@@ -11,7 +11,6 @@ namespace UI
             // Initialize the RestaurantReviewManager from the class library
             var manager = new RestaurantReviewLib.RestaurantReviewManager();
  
-            // Example usage
             var user = new RestaurantReviewLib.User { Username = "user1", Password = "password123" };
             var restaurant = new RestaurantReviewLib.Restaurant
             {
@@ -28,12 +27,10 @@ namespace UI
                 Date = DateTime.Now
             };
  
-            // Add user, restaurant, and review
             manager.AddUser(user);
             manager.AddRestaurant(restaurant);
             manager.AddReview(review.RestaurantId, review.ReviewerId, review.Comment, review.Rating);
  
-            // Display restaurant information and reviews
             Console.WriteLine($"Restaurant: {restaurant.Name}");
             Console.WriteLine($"Cuisine: {restaurant.Cuisine}");
             Console.WriteLine($"Location: {restaurant.Location}");
@@ -44,7 +41,6 @@ namespace UI
                 Console.WriteLine($"- {manager.GetUserById(r.ReviewerId)?.Username} rated it as {r.Rating} on {r.Date.ToShortDateString()}: {r.Comment}");
             }
  
-            // Save data before exiting the program
             manager.SaveData();
         }
     }
