@@ -1,15 +1,23 @@
 ﻿namespace Lib.models
 {
-   public class User
+    public class User
     {
-        public int Id { get; set; }
-        public  string UserName { get; set; }
-        public  string Password { get; set; }
-        public  string Role { get; set; }
+        public int Id;
+        public string Username;
+        public string Password;
+        public Role Role;
 
-public bool ValidateCredentials(string inputUsername, string inputPassword)
-    {
-        return inputUsername == UserName && inputPassword == Password;
-    }
+        public User(int Id, string Username, string Password, Role Role)
+        {
+            this.Id = Id;
+            this.Username = Username;
+            this.Password = Password;
+            this.Role = Role;
+        }
+
+        public bool ValidateCredentials(string Username, string Password)
+        {
+            return this.Username == Username && this.Password == Password;
+        }
     }
 }

@@ -4,14 +4,19 @@ namespace UI
 {
     internal class Program
     {
-        
+
         static void Main(string[] args)
         {
             App app = new App();
             app.PrintBanner();
-            app.Login();
             
-                   
+            bool IsLoggedIn = false;
+            while (!IsLoggedIn)
+            {
+                IsLoggedIn = app.PromptLogin();
+            }
+
+
             /*
             while(true)
             {
@@ -37,7 +42,7 @@ namespace UI
             }
             */
 
- 
+
             // Initialize the RestaurantReviewManager from the class library
             /*
             var manager = new RestaurantReviewLib.RestaurantReviewManager();
