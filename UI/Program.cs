@@ -12,7 +12,7 @@ namespace UI
             app.Login();
             
                    
-            /*
+            
             while(true)
             {
                 Console.WriteLine("\nMenu:");
@@ -73,7 +73,7 @@ namespace UI
             }
  
             manager.SaveData();
-            */
+            
         }
     }
 }
