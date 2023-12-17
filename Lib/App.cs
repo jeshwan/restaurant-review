@@ -1,4 +1,5 @@
-﻿using Lib.models;
+﻿using System.Runtime.InteropServices;
+using Lib.models;
 
 namespace Lib
 {
@@ -9,23 +10,18 @@ namespace Lib
 
         public App()
         {
-            User user1 = new User(0, "a", "b", Role.Regular);
-            User user2 = new User(0, "b", "c", Role.Admin);
-
-            _users.Add(user1);
-            _users.Add(user2);
         }
 
         public List<User> Users
         {
             get { return _users; }
-            set { _users = value; }
+            set {}
         }
 
         public User? LoggedInUser
         {
             get { return _LoggedInUser; }
-            set { }
+            set { _LoggedInUser = value; }
         }
 
         public void PrintBanner()
@@ -34,40 +30,90 @@ namespace Lib
             Console.WriteLine("Restaurant Review App\n");
         }
 
-        public void PrintLoginBanner()
+        public void PrintMenu()
         {
-            if (_LoggedInUser == null) return;
+            Console.WriteLine("1. Login");
+            Console.WriteLine("2. Add new user");
+            Console.WriteLine();
+
+            Console.Write("Enter choice: ");
+            int choice = int.Parse(Console.ReadLine());
 
             PrintBanner();
-            Console.WriteLine($"Welcome, {_LoggedInUser.UserName}.\n");
+            if (choice == 1) {
+                Login();
+            } else if (choice == 2) {
+                AddUser();
+            }
         }
 
-        public User? PromptLogin()
+        private void Login()
         {
-            if (_LoggedInUser != null) return _LoggedInUser;
-
-            Console.Write("Enter your username: ");
-            string username = Console.ReadLine();
-
-            Console.Write("Enter your password: ");
-            string password = Console.ReadLine();
-
-            User? user = _users.Find(u => u.UserName == username);
-            if (user == null)
+            while (_LoggedInUser == null)
             {
-                Console.WriteLine($"Username \"{username}\" cannot be found! Please try again.\n");
-                return null;
+                Console.Write("Enter username: ");
+                string inputUserName = Console.ReadLine();
+
+                Console.Write("Enter password: ");
+                string inputPassword = Console.ReadLine();
+
+                User? user = _users.Find(u => u.UserName == inputUserName);
+
+                PrintBanner();
+                if (user != null && user.ValidateCredentials(inputUserName, inputPassword))
+                {
+                    _LoggedInUser = user;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"Welcome, {_LoggedInUser.UserName}.\n");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid username or password. Please try again.\n");
+                    Console.ResetColor();
+                }
             }
-            else if (user.ValidateCredentials(username, password))
+        }
+
+        private void AddUser()
+        {
+            Console.Write("Enter username: ");
+            string inputUserName = Console.ReadLine();
+
+            Console.Write("Enter password: ");
+            string inputPassword = Console.ReadLine();
+
+            Console.Write("Enter role (Regular = 1, Admin = 2): ");
+            Role inputRole = Role.Regular;
+            if (int.TryParse(Console.ReadLine(), out int roleNum))
             {
-                _LoggedInUser = user;
-                return user;
+                if (Enum.IsDefined(typeof(Role), roleNum))
+                {
+                    inputRole = (Role)roleNum;
+                }
             }
-            else
+            
+            PrintBanner();
+            if (inputRole == Role.Regular)
             {
-                Console.WriteLine("Invalid username or password. Please try again.\n");
-                return null;
+                User user = new User(_users.Count(), inputUserName, inputPassword);
+                _users.Add(user);
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Regular user \"{user.UserName}\" added successfully.\n");
+                Console.ResetColor();
+            } else if (inputRole == Role.Admin)
+            {
+                Admin admin = new Admin(_users.Count(), inputUserName, inputPassword);
+                _users.Add(admin);
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Admin \"{admin.UserName}\" added successfully.\n");
+                Console.ResetColor();
             }
+
+            PrintMenu();
         }
     }
 }

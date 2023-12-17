@@ -1,12 +1,13 @@
-﻿public class Admin
-{
-    public int AdminId { get; set; }
-    public string Name { get; set; }
+﻿using Lib.models;
 
-    public Admin()
+public class Admin : User
+{
+    public Admin(int userId, string userName, string password) : base(userId, userName, password)
     {
+        base.Role = Role.Admin;
     }
 
+    /*
     public void AddUser(string userName)
     {
         if (string.IsNullOrEmpty(userName))
@@ -19,6 +20,7 @@
         // usersDatabase.Add(new User { UserId = userId, UserName = userName });
         // Console.WriteLine($"User '{userName}' with ID {userId} added successfully.");
     }
+    */
 
     /*
     public User SearchUser(string userName)
