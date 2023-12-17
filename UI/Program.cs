@@ -1,4 +1,5 @@
 ﻿using Lib;
+using Lib.models;
 
 namespace UI
 {
@@ -8,13 +9,7 @@ namespace UI
         {
             App app = new App();
             app.PrintBanner();
-            app.PromptLogin();
-
-            while (app.LoggedInUser == null)
-            {
-                app.LoggedInUser = app.PromptLogin();
-            }
-            app.PrintLoginBanner();
+            app.PrintMenu();
 
             /*
             while(true)
