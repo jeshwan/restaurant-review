@@ -7,7 +7,14 @@ namespace UI
         static void Main(string[] args)
         {
             App app = new App();
+            app.PrintBanner();
             app.PromptLogin();
+
+            while (app.LoggedInUser == null)
+            {
+                app.LoggedInUser = app.PromptLogin();
+            }
+            app.PrintLoginBanner();
 
             /*
             while(true)
