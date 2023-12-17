@@ -2,49 +2,68 @@
 
 namespace Lib
 {
-
     public class App
     {
-        public List<User> users = new List<User>();
+        private User? _LoggedInUser = null;
+        private List<User> _users = new List<User>();
 
         public App()
         {
+            PrintBanner();
+
             User user1 = new User(0, "a", "b", Role.Regular);
             User user2 = new User(0, "b", "c", Role.Admin);
 
-            users.Add(user1);
-            users.Add(user2);
+            _users.Add(user1);
+            _users.Add(user2);
+        }
+
+        public List<User> Users
+        {
+            get { return _users; }
+            set { }
         }
 
         public void PrintBanner()
         {
+            Console.Clear();
             Console.WriteLine("Restaurant Review App\n");
         }
 
-        public bool PromptLogin()
+        public void PrintLoginBanner()
         {
-            Console.Write("Enter your username: ");
-            string username = Console.ReadLine();
+            if (_LoggedInUser == null) return;
 
-            Console.Write("Enter your password: ");
-            string password = Console.ReadLine();
+            PrintBanner();
+            Console.WriteLine($"Welcome, {_LoggedInUser.UserName}.\n");
+        }
 
-            User? user = users.Find(u => u.Username == username);
-            if (user == null)
+        public void PromptLogin()
+        {
+            while (_LoggedInUser == null)
             {
-                Console.WriteLine($"Username \"{username}\" cannot be found! Please try again.\n");
-                return false;
+                Console.Write("Enter your username: ");
+                string username = Console.ReadLine();
+
+                Console.Write("Enter your password: ");
+                string password = Console.ReadLine();
+
+                User? user = _users.Find(u => u.UserName == username);
+                if (user == null)
+                {
+                    Console.WriteLine($"Username \"{username}\" cannot be found! Please try again.\n");
+                }
+                else if (user.ValidateCredentials(username, password))
+                {
+                    _LoggedInUser = user;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid username or password. Please try again.\n");
+                }
             }
-            else if (user.ValidateCredentials(username, password))
-            {
-                Console.WriteLine($"Login successful! Welcome, {username}.\n");
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("Invalid username or password. Please try again.\n");
-                return false;
-            }
+
+            PrintLoginBanner();
         }
     }
 }

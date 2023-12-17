@@ -2,22 +2,28 @@
 {
     public class User
     {
-        public int Id;
-        public string Username;
-        public string Password;
-        public Role Role;
+        private int _userId;
+        private string _userName;
+        private string _password;
+        private Role _role;
 
-        public User(int Id, string Username, string Password, Role Role)
+        public User(int userId, string userName, string password, Role role)
         {
-            this.Id = Id;
-            this.Username = Username;
-            this.Password = Password;
-            this.Role = Role;
+            _userId = userId;
+            _userName = userName;
+            _password = password;
+            _role = role;
         }
 
-        public bool ValidateCredentials(string Username, string Password)
+        public string UserName
         {
-            return this.Username == Username && this.Password == Password;
+            get { return _userName; }
+            set { }
+        }
+
+        public bool ValidateCredentials(string userName, string password)
+        {
+            return this._userName == userName && this._password == password;
         }
     }
 }

@@ -4,18 +4,10 @@ namespace UI
 {
     internal class Program
     {
-
         static void Main(string[] args)
         {
             App app = new App();
-            app.PrintBanner();
-            
-            bool IsLoggedIn = false;
-            while (!IsLoggedIn)
-            {
-                IsLoggedIn = app.PromptLogin();
-            }
-
+            app.PromptLogin();
 
             /*
             while(true)
@@ -78,8 +70,7 @@ namespace UI
             }
  
             manager.SaveData();
-            
+            */
         }
     }
 }
-            */
