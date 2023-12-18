@@ -78,8 +78,11 @@ namespace Lib
                 if (_loggedInUser.Role == Role.Regular)
                 {
                     Console.WriteLine("1. List restaurants");
-                    Console.WriteLine("2. ");
-                    Console.WriteLine("3. Log out");
+                    Console.WriteLine("2. Add review");
+                    Console.WriteLine("3. View details");
+                    Console.WriteLine("4. View reviews");
+                    Console.WriteLine("5. Search restaurants");
+                    Console.WriteLine("6. Log out");
                     Console.WriteLine();
 
                     Console.Write("Enter choice: ");
@@ -89,10 +92,11 @@ namespace Lib
                     switch (choice)
                     {
                         case "1":
+                            ListRestaurants();
                             break;
                         case "2":
                             break;
-                        case "3":
+                        case "6":
                             LogOut();
                             break;
                         default:
@@ -224,6 +228,19 @@ namespace Lib
             foreach (User user in filteredUsers)
             {
                 Console.WriteLine(user.UserName);
+            }
+
+            Console.ReadLine();
+            PrintUserBanner();
+        }
+
+        private void ListRestaurants()
+        {
+            PrintUserBanner();
+
+            foreach (Restaurant restaurant in _restaurants)
+            {
+                Console.WriteLine(restaurant.Name);
             }
 
             Console.ReadLine();

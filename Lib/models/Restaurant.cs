@@ -17,6 +17,30 @@
             _reviews = new List<Review>();
         }
 
+        public int RestaurantId
+        {
+            get { return _restaurantId; }
+            set { }
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set { }
+        }
+
+        public string Cuisine
+        {
+            get { return _cuisine; }
+            set { }
+        }
+
+        public string Location
+        {
+            get { return _location; }
+            set { }
+        }
+
         public void DisplayDetails()
         {
             Console.WriteLine("\nRestaurant Details:");
