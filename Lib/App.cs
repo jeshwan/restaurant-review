@@ -78,9 +78,9 @@ namespace Lib
                 if (_loggedInUser.Role == Role.Regular)
                 {
                     Console.WriteLine("1. List restaurants");
-                    Console.WriteLine("2. Add review");
-                    Console.WriteLine("3. View details");
-                    Console.WriteLine("4. View reviews");
+                    Console.WriteLine("2. Add restaurant review");
+                    Console.WriteLine("3. View restarant details");
+                    Console.WriteLine("4. View restarant reviews");
                     Console.WriteLine("5. Search restaurants");
                     Console.WriteLine("6. Log out");
                     Console.WriteLine();
@@ -96,6 +96,9 @@ namespace Lib
                             break;
                         case "2":
                             AddReview();
+                            break;
+                        case "3":
+                            ViewRestaurantDetails();
                             break;
                         case "6":
                             LogOut();
@@ -297,6 +300,42 @@ namespace Lib
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Review added successfully.\n");
             Console.ResetColor();
+        }
+
+        private void ViewRestaurantDetails()
+        {
+            PrintUserBanner();
+
+            Restaurant? restaurant = null;
+            while (restaurant == null)
+            {
+                Console.Write("Enter restaurant id: ");
+                string inputRestaurantId = Console.ReadLine();
+
+                if (int.TryParse(inputRestaurantId, out int restaurantId))
+                {
+                    restaurant = _restaurants.Find(r => r.RestaurantId == restaurantId);
+                    if (restaurant == null)
+                    {
+                        PrintUserBanner();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"Restaurant ID \"{restaurantId}\" does not exist.\n");
+                        Console.ResetColor();
+                    }
+                } else
+                {
+                    PrintUserBanner();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid restaurant ID. Please try again.\n");
+                    Console.ResetColor();
+                }
+            }
+
+            Console.WriteLine();
+            restaurant.PrintDetails();
+
+            Console.ReadLine();
+            PrintUserBanner();
         }
 
         private void LogOut()

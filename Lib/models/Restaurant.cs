@@ -52,9 +52,9 @@
             Reviews.Add(review);
         }
 
-        public void DisplayDetails()
+        public void PrintDetails()
         {
-            Console.WriteLine("\nRestaurant Details:");
+            Console.WriteLine("Restaurant Details:");
             Console.WriteLine($"Restaurant ID: {_restaurantId}");
             Console.WriteLine($"Name: {_name}");
             Console.WriteLine($"Cuisine: {_cuisine}");
