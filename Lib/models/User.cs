@@ -15,6 +15,12 @@
             _role = role;
         }
 
+        public int UserId
+        {
+            get { return _userId; }
+            set { }
+        }
+
         public string UserName
         {
             get { return _userName; }

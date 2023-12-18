@@ -2,11 +2,19 @@
 {
     public class Review
     {
-        public int ReviewId { get; set; }
-        public int RestaurantId { get; set; }
-        public int ReviewerId { get; set; }
-        public string Comment { get; set; }
-        public Rating Rating { get; set; }
-        public DateTime Date { get; set; }
+        private int _reviewId;
+        private int _reviewerId;
+        private string _comment;
+        private Rating _rating;
+        private DateTime _date;
+
+        public Review(int reviewId, int reviewerId, string comment, Rating rating)
+        {
+            _reviewId = reviewId;
+            _reviewerId = reviewerId;
+            _comment = comment;
+            _rating = rating;
+            _date = DateTime.Now;
+        }
     }
 }

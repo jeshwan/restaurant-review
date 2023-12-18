@@ -41,6 +41,17 @@
             set { }
         }
 
+        public List<Review> Reviews
+        {
+            get { return _reviews; }
+            set { }
+        }
+
+        public void AddReview(Review review)
+        {
+            Reviews.Add(review);
+        }
+
         public void DisplayDetails()
         {
             Console.WriteLine("\nRestaurant Details:");

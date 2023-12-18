@@ -95,6 +95,7 @@ namespace Lib
                             ListRestaurants();
                             break;
                         case "2":
+                            AddReview();
                             break;
                         case "6":
                             LogOut();
@@ -207,10 +208,10 @@ namespace Lib
             Console.Write("Enter location: ");
             string inputLocation = Console.ReadLine();
 
-            PrintBanner();
             Restaurant restaurant = new Restaurant(_restaurants.Count(), inputName, inputCuisine, inputLocation);
             _restaurants.Add(restaurant);
 
+            PrintUserBanner();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Restaurant \"{inputName}\" added successfully.\n");
             Console.ResetColor();
@@ -245,6 +246,57 @@ namespace Lib
 
             Console.ReadLine();
             PrintUserBanner();
+        }
+
+        private void AddReview()
+        {
+            PrintUserBanner();
+
+            Restaurant? restaurant = null;
+            while (restaurant == null)
+            {
+                Console.Write("Enter restaurant id: ");
+                string inputRestaurantId = Console.ReadLine();
+
+                if (int.TryParse(inputRestaurantId, out int restaurantId))
+                {
+                    restaurant = _restaurants.Find(r => r.RestaurantId == restaurantId);
+                    if (restaurant == null)
+                    {
+                        PrintUserBanner();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"Restaurant ID \"{restaurantId}\" does not exist.\n");
+                        Console.ResetColor();
+                    }
+                } else
+                {
+                    PrintUserBanner();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid restaurant ID. Please try again.\n");
+                    Console.ResetColor();
+                }
+            }
+
+            Console.Write("Enter comment: ");
+            string inputComment = Console.ReadLine();
+
+            Console.Write("Enter rating (Poor = 1, Fair = 2, Average = 3, Good = 4, Excellent = 5): ");
+            Rating inputRating = Rating.Poor;
+            if (int.TryParse(Console.ReadLine(), out int ratingNum))
+            {
+                if (Enum.IsDefined(typeof(Rating), ratingNum))
+                {
+                    inputRating = (Rating)ratingNum;
+                }
+            }
+
+            Review review = new Review(restaurant.Reviews.Count(), _loggedInUser.UserId, inputComment, inputRating);
+            restaurant.AddReview(review);
+
+            PrintUserBanner();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Review added successfully.\n");
+            Console.ResetColor();
         }
 
         private void LogOut()
