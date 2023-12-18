@@ -100,6 +100,9 @@ namespace Lib
                         case "3":
                             ViewRestaurantDetails();
                             break;
+                        case "4":
+                            ViewRestaurantReviews();
+                            break;
                         case "6":
                             LogOut();
                             break;
@@ -333,6 +336,41 @@ namespace Lib
 
             Console.WriteLine();
             restaurant.PrintDetails();
+
+            Console.ReadLine();
+            PrintUserBanner();
+        }
+        private void ViewRestaurantReviews()
+        {
+            PrintUserBanner();
+
+            Restaurant? restaurant = null;
+            while (restaurant == null)
+            {
+                Console.Write("Enter restaurant id: ");
+                string inputRestaurantId = Console.ReadLine();
+
+                if (int.TryParse(inputRestaurantId, out int restaurantId))
+                {
+                    restaurant = _restaurants.Find(r => r.RestaurantId == restaurantId);
+                    if (restaurant == null)
+                    {
+                        PrintUserBanner();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"Restaurant ID \"{restaurantId}\" does not exist.\n");
+                        Console.ResetColor();
+                    }
+                } else
+                {
+                    PrintUserBanner();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid restaurant ID. Please try again.\n");
+                    Console.ResetColor();
+                }
+            }
+
+            Console.WriteLine();
+            restaurant.PrintReviews(ref _users);
 
             Console.ReadLine();
             PrintUserBanner();

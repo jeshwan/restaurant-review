@@ -16,5 +16,38 @@
             _rating = rating;
             _date = DateTime.Now;
         }
+
+        public void PrintDetails(ref List<User> users)
+        {
+            Console.WriteLine($"Review ID: {_reviewId}");
+            Console.WriteLine($"Reviewer ID: {_reviewerId}");
+
+            User reviewer = users.Find(user => user.UserId == _reviewerId);
+            Console.WriteLine($"Reviewer UserName: {reviewer.UserName}");
+
+            Console.WriteLine($"Comment: {_comment}");
+            Console.Write($"Rating: ");
+            switch (_rating)
+            {
+                case Rating.Poor:
+                    Console.WriteLine("Poor (1/5)");
+                    break;
+                case Rating.Fair:
+                    Console.WriteLine("Fair (2/5)");
+                    break;
+                case Rating.Average:
+                    Console.WriteLine("Average (3/5)");
+                    break;
+                case Rating.Good:
+                    Console.WriteLine("Good (4/5)");
+                    break;
+                case Rating.Excellent:
+                    Console.WriteLine("Excellent (5/5)");
+                    break;
+            }
+
+            Console.WriteLine($"Date: {_date}");
+            Console.WriteLine();
+        }
     }
 }

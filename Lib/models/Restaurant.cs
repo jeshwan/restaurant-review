@@ -55,10 +55,19 @@
         public void PrintDetails()
         {
             Console.WriteLine("Restaurant Details:");
-            Console.WriteLine($"Restaurant ID: {_restaurantId}");
+            // Console.WriteLine($"Restaurant ID: {_restaurantId}");
             Console.WriteLine($"Name: {_name}");
             Console.WriteLine($"Cuisine: {_cuisine}");
             Console.WriteLine($"Location: {_location}");
+        }
+
+        public void PrintReviews(ref List<User> users)
+        {
+            Console.WriteLine("Restaurant Reviews:");
+            foreach (Review review in Reviews)
+            {
+                review.PrintDetails(ref users);
+            }
         }
     }
 }
