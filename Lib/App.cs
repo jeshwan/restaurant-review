@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Xml.Linq;
 using Lib.models;
 
 namespace Lib
@@ -233,7 +234,16 @@ namespace Lib
             Console.Write("Enter location: ");
             string inputLocation = Console.ReadLine();
 
-            Restaurant restaurant = new Restaurant(_restaurants.Count(), inputName, inputCuisine, inputLocation);
+            Console.Write("Enter Opening Time: ");
+            string openingTime = Console.ReadLine();
+
+            Console.Write("Enter Closing Time: ");
+            string closingTime= Console.ReadLine();
+
+            Console.Write("Enter Food Category: ");
+            string foodCategory = Console.ReadLine();
+
+            Restaurant restaurant = new Restaurant(_restaurants.Count(), inputName, inputCuisine, inputLocation, openingTime, closingTime, foodCategory);
             _restaurants.Add(restaurant);
 
             PrintUserBanner();
@@ -375,6 +385,8 @@ namespace Lib
                 Console.Write("Enter restaurant id: ");
                 string inputRestaurantId = Console.ReadLine();
 
+               
+
                 if (int.TryParse(inputRestaurantId, out int restaurantId))
                 {
                     restaurant = _restaurants.Find(r => r.RestaurantId == restaurantId);
@@ -394,6 +406,8 @@ namespace Lib
                     Console.ResetColor();
                 }
             }
+
+            Console.WriteLine($"Restaurant Name: {restaurant.Name}");
 
             Console.WriteLine();
             restaurant.PrintReviews(ref _users);

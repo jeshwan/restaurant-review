@@ -10,19 +10,25 @@ namespace Lib.models
         private string _cuisine;
         private string _location;
         private List<Review> _reviews = new List<Review>();
+        private string _openingTime;
+        private string _closingTime;
+        private string _foodCategory;
 
         public Restaurant()
         {
 
         }
 
-        public Restaurant(int restaurantId, string name, string cuisine, string location)
+        public Restaurant(int restaurantId, string name, string cuisine, string location, string openingTime, string closingTime, string foodCategory)
         {
             _restaurantId = restaurantId;
             _name = name;
             _cuisine = cuisine;
             _location = location;
             _reviews = new List<Review>();
+            _openingTime =  openingTime;
+            _closingTime = closingTime;
+            _foodCategory = foodCategory;
         }
 
         [JsonPropertyName("restaurantId")]
@@ -60,6 +66,27 @@ namespace Lib.models
             set { _reviews = value; }
         }
 
+        [JsonPropertyName("openingTime")]
+        public string OpeningTime
+        {
+            get { return _openingTime; }
+            set { _openingTime = value; }
+        }
+
+        [JsonPropertyName("closingTime")]
+        public string closingtime
+        {
+            get { return _closingTime; }
+            set { _closingTime = value; }
+        }
+
+        [JsonPropertyName("Food Category")]
+        public string foodCategory
+        {
+            get { return _foodCategory; }
+            set { _foodCategory = value; }
+        }
+
         public void AddReview(Review review)
         {
             Reviews.Add(review);
@@ -72,6 +99,10 @@ namespace Lib.models
             Console.WriteLine($"Name: {_name}");
             Console.WriteLine($"Cuisine: {_cuisine}");
             Console.WriteLine($"Location: {_location}");
+            Console.WriteLine($"Opening Time: {_openingTime}");
+            Console.WriteLine($"Closing Time: {_closingTime}");
+            Console.WriteLine($"Menu: {_foodCategory}");
+
         }
 
         public void PrintReviews(ref List<User> users)
