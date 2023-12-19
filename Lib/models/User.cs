@@ -46,6 +46,20 @@ namespace Lib.models
 
         public User(int userId, string userName, string password, Role role = Role.Regular)
         {
+            /// <summary>
+            /// Initializes the properties of a <see cref="User"/> object with the provided values.
+            /// </summary>
+            /// <param name="userId">The ID of the user.</param>
+            /// <param name="userName">The username of the user.</param>
+            /// <param name="password">The password of the user.</param>
+            /// <param name="role">The role of the user.</param>
+            /// <remarks>
+            /// This code snippet involves the initialization of various properties of a <see cref="User"/> object:
+            /// - <see cref="_userId"/>: The ID of the user.
+            /// - <see cref="_userName"/>: The username of the user.
+            /// - <see cref="_password"/>: The password of the user.
+            /// - <see cref="_role"/>: The role of the user.
+            /// </remarks>
             _userId = userId;
             _userName = userName;
             _password = password;

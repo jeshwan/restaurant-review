@@ -21,6 +21,27 @@ namespace Lib.models
 
         public Restaurant(int restaurantId, string name, string cuisine, string location, string openingTime, string closingTime, string foodCategory)
         {
+            /// <summary>
+            /// Initializes the properties of a <see cref="Restaurant"/> object with the provided values.
+            /// </summary>
+            /// <param name="restaurantId">The ID of the restaurant.</param>
+            /// <param name="name">The name of the restaurant.</param>
+            /// <param name="cuisine">The cuisine type of the restaurant.</param>
+            /// <param name="location">The location of the restaurant.</param>
+            /// <param name="openingTime">The opening time of the restaurant.</param>
+            /// <param name="closingTime">The closing time of the restaurant.</param>
+            /// <param name="foodCategory">The food category of the restaurant.</param>
+            /// <remarks>
+            /// This code snippet involves the initialization of various properties of a <see cref="Restaurant"/> object:
+            /// - <see cref="_restaurantId"/>: The ID of the restaurant.
+            /// - <see cref="_name"/>: The name of the restaurant.
+            /// - <see cref="_cuisine"/>: The cuisine type of the restaurant.
+            /// - <see cref="_location"/>: The location of the restaurant.
+            /// - <see cref="_reviews"/>: A new list of reviews is assigned.
+            /// - <see cref="_openingTime"/>: The opening time of the restaurant.
+            /// - <see cref="_closingTime"/>: The closing time of the restaurant.
+            /// - <see cref="_foodCategory"/>: The food category of the restaurant.
+            /// </remarks>
             _restaurantId = restaurantId;
             _name = name;
             _cuisine = cuisine;
@@ -102,6 +123,19 @@ namespace Lib.models
             Console.WriteLine($"Opening Time: {_openingTime}");
             Console.WriteLine($"Closing Time: {_closingTime}");
             Console.WriteLine($"Menu: {_foodCategory}");
+
+            /// <summary>
+            /// Prints the details of the restaurant, including its name, cuisine, location, opening time, closing time, and menu.
+            /// </summary>
+            /// <remarks>
+            /// This code snippet involves the following steps:
+            /// 1. Prints the name of the restaurant using <see cref="Console.WriteLine"/>.
+            /// 2. Prints the cuisine type of the restaurant using <see cref="Console.WriteLine"/>.
+            /// 3. Prints the location of the restaurant using <see cref="Console.WriteLine"/>.
+            /// 4. Prints the opening time of the restaurant using <see cref="Console.WriteLine"/>.
+            /// 5. Prints the closing time of the restaurant using <see cref="Console.WriteLine"/>.
+            /// 6. Prints the menu or food category of the restaurant using <see cref="Console.WriteLine"/>.
+            /// </remarks>
 
         }
 

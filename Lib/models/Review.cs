@@ -10,6 +10,18 @@ namespace Lib.models
         private Rating _rating;
         private DateTime _date;
 
+        /// <summary>
+        /// Represents a review with various properties such as review ID, reviewer ID, comment, rating, and date.
+        /// </summary>
+        /// <remarks>
+        /// This code snippet involves the declaration of private fields for a review:
+        /// - <see cref="_reviewId"/>: The ID of the review.
+        /// - <see cref="_reviewerId"/>: The ID of the reviewer.
+        /// - <see cref="_comment"/>: The comment provided in the review.
+        /// - <see cref="_rating"/>: The rating given in the review.
+        /// - <see cref="_date"/>: The date of the review.
+        /// </remarks>
+
         [JsonPropertyName("reviewId")]
         public int ReviewId
         {
@@ -58,6 +70,22 @@ namespace Lib.models
             _comment = comment;
             _rating = rating;
             _date = DateTime.Now;
+
+            /// <summary>
+            /// Initializes the properties of a <see cref="Review"/> object with the provided values and sets the date to the current date and time.
+            /// </summary>
+            /// <param name="reviewId">The ID of the review.</param>
+            /// <param name="reviewerId">The ID of the reviewer.</param>
+            /// <param name="comment">The comment provided in the review.</param>
+            /// <param name="rating">The rating given in the review.</param>
+            /// <remarks>
+            /// This code snippet involves the initialization of various properties of a <see cref="Review"/> object:
+            /// - <see cref="_reviewId"/>: The ID of the review.
+            /// - <see cref="_reviewerId"/>: The ID of the reviewer.
+            /// - <see cref="_comment"/>: The comment provided in the review.
+            /// - <see cref="_rating"/>: The rating given in the review.
+            /// - <see cref="_date"/>: The date of the review, set to the current date and time using <see cref="DateTime.Now"/>.
+            /// </remarks>
         }
 
         public void PrintDetails(ref List<User> users)
