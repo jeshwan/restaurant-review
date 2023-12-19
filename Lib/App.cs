@@ -46,20 +46,29 @@ namespace Lib
                 AddUser();
             }
         }
-
+        /// <summary>
+        /// Logs in a user by prompting for a username and password.
+        /// </summary>
+        /// <remarks>
+        /// This method continues to prompt for a username and password until a valid user is logged in.
+        /// </remarks>
         private void Login()
         {
             while (_LoggedInUser == null)
             {
+                // Find the user with the given username
+
                 Console.Write("Enter username: ");
                 string inputUserName = Console.ReadLine();
+
 
                 Console.Write("Enter password: ");
                 string inputPassword = Console.ReadLine();
 
                 User? user = _users.Find(u => u.UserName == inputUserName);
-
+                // Print the application banner
                 PrintBanner();
+                // Validate user credentials
                 if (user != null && user.ValidateCredentials(inputUserName, inputPassword))
                 {
                     _LoggedInUser = user;
@@ -75,7 +84,13 @@ namespace Lib
                 }
             }
         }
-
+        /// <summary>
+        /// Adds a new user based on user input for username, password, and role.
+        /// </summary>
+        /// <remarks>
+        /// This method prompts the user for a username, password, and role (Regular or Admin).
+        /// The user is added to the user collection, and a success message is displayed.
+        /// </remarks>
         private void AddUser()
         {
             Console.Write("Enter username: ");
@@ -105,6 +120,7 @@ namespace Lib
                 Console.ResetColor();
             } else if (inputRole == Role.Admin)
             {
+                // Create and add a new admin user
                 Admin admin = new Admin(_users.Count(), inputUserName, inputPassword);
                 _users.Add(admin);
 
@@ -112,6 +128,7 @@ namespace Lib
                 Console.WriteLine($"Admin \"{admin.UserName}\" added successfully.\n");
                 Console.ResetColor();
             }
+            // Print the main menu
 
             PrintMenu();
         }
