@@ -1,15 +1,26 @@
-﻿using Lib.models;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using Lib.models;
 
 namespace Lib
 {
     public class App
     {
         private User? _loggedInUser = null;
-        private List<User> _users = new List<User>();
-        private List<Restaurant> _restaurants = new List<Restaurant>();
+
+        [JsonPropertyName("users")]
+        private List<User> _users;
+
+        [JsonPropertyName("restaurants")]
+        private List<Restaurant> _restaurants;
 
         public App()
         {
+            _users = LoadUsers();
+            _restaurants = LoadRestaurants();
+
+            // Console.ReadLine();
+
             PrintBanner();
             PrintMenu();
         }
@@ -17,7 +28,13 @@ namespace Lib
         public List<User> Users
         {
             get { return _users; }
-            set { }
+            set { _users = value; }
+        }
+
+        public List<Restaurant> Restaurants
+        {
+            get { return _restaurants; }
+            set { _restaurants = value; }
         }
 
         public User? LoggedInUser
@@ -201,6 +218,8 @@ namespace Lib
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{(inputRole == Role.Regular ? "Regular user" : "Admin")} \"{user.UserName}\" added successfully.\n");
             Console.ResetColor();
+
+            SaveUsers();
         }
 
         private void AddRestaurant()
@@ -221,6 +240,8 @@ namespace Lib
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Restaurant \"{inputName}\" added successfully.\n");
             Console.ResetColor();
+
+            SaveRestaurants();
         }
 
         private void SearchUsers()
@@ -274,7 +295,8 @@ namespace Lib
                         Console.WriteLine($"Restaurant ID \"{restaurantId}\" does not exist.\n");
                         Console.ResetColor();
                     }
-                } else
+                }
+                else
                 {
                     PrintUserBanner();
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -303,6 +325,8 @@ namespace Lib
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Review added successfully.\n");
             Console.ResetColor();
+
+            SaveRestaurants();
         }
 
         private void ViewRestaurantDetails()
@@ -325,7 +349,8 @@ namespace Lib
                         Console.WriteLine($"Restaurant ID \"{restaurantId}\" does not exist.\n");
                         Console.ResetColor();
                     }
-                } else
+                }
+                else
                 {
                     PrintUserBanner();
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -360,7 +385,8 @@ namespace Lib
                         Console.WriteLine($"Restaurant ID \"{restaurantId}\" does not exist.\n");
                         Console.ResetColor();
                     }
-                } else
+                }
+                else
                 {
                     PrintUserBanner();
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -379,6 +405,68 @@ namespace Lib
         private void LogOut()
         {
             _loggedInUser = null;
+        }
+
+        private void SaveUsers()
+        {
+            string json = JsonSerializer.Serialize(_users, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
+
+            File.WriteAllText("users.json", json);
+        }
+
+        private List<User> LoadUsers()
+        {
+            try
+            {
+                string json = File.ReadAllText("users.json");
+                List<User> users = JsonSerializer.Deserialize<List<User>>(json);
+                if (users == null)
+                {
+                    return new List<User>();
+                } else
+                {
+                    return users;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"An error occurred while loading restaurants: {e.Message}");
+                return new List<User>();
+            }
+        }
+
+        private void SaveRestaurants()
+        {
+            string json = JsonSerializer.Serialize(_restaurants, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
+
+            File.WriteAllText("restaurants.json", json);
+        }
+
+        private List<Restaurant> LoadRestaurants()
+        {
+            try
+            {
+                string json = File.ReadAllText("restaurants.json");
+                List<Restaurant> restaurants = JsonSerializer.Deserialize<List<Restaurant>>(json);
+                if (restaurants == null)
+                {
+                    return new List<Restaurant>();
+                } else
+                {
+                    return restaurants;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"An error occurred while loading restaurants: {e.Message}");
+                return new List<Restaurant>();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace Lib.models
+﻿
+namespace Lib.models
 {
     public enum Rating
     {

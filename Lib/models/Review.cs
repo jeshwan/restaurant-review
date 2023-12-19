@@ -1,4 +1,6 @@
-﻿namespace Lib.models
+﻿using System.Text.Json.Serialization;
+
+namespace Lib.models
 {
     public class Review
     {
@@ -7,6 +9,46 @@
         private string _comment;
         private Rating _rating;
         private DateTime _date;
+
+        [JsonPropertyName("reviewId")]
+        public int ReviewId
+        {
+            get { return _reviewId; }
+            set { _reviewId = value; }
+        }
+
+        [JsonPropertyName("reviewerId")]
+        public int ReviewerId
+        {
+            get { return _reviewerId; }
+            set { _reviewerId = value; }
+        }
+
+        [JsonPropertyName("comment")]
+        public string Comment
+        {
+            get { return _comment; }
+            set { _comment = value; }
+        }
+
+        [JsonPropertyName("rating")]
+        public Rating Rating
+        {
+            get { return _rating; }
+            set { _rating = value; }
+        }
+
+        [JsonPropertyName("date")]
+        public DateTime Date
+        {
+            get { return _date; }
+            set { _date = value; }
+        }
+
+        public Review()
+        {
+
+        }
 
         public Review(int reviewId, int reviewerId, string comment, Rating rating)
         {
